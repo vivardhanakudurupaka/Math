@@ -1,0 +1,14 @@
+from scipy.integrate import solve_ivp
+import numpy as np
+
+def dTdt(t, T):
+    Ta = 20
+    k = 0.02
+    return -k * (T - Ta)
+
+T0 = 100
+t_span = (0, 10)
+sol = solve_ivp(dTdt, t_span, [T0], t_eval=np.linspace(0, 10, 100))
+T_at_10_minutes = sol.y[0][-1]
+
+print("Temperature of the object after 10 minutes:", T_at_10_minutes, "°C")
